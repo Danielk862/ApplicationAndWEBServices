@@ -4,18 +4,22 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Orders.Shared.Entites
 {
-    public class Country : IEntityWithName
+    public class State : IEntityWithName
     {
         public int Id { get; set; }
 
-        [Display(Name = "País")]
+        [Display(Name = "Estado")]
         [MaxLength(100, ErrorMessage = "El campo {0} no puede tener más de {1} caracteres.")]
         [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string Name { get; set; } = null!;
 
-        public ICollection<State>? States { get; set; }
+        public int CountryId { get; set; }
 
-        [DisplayName("Estado/Departamentos")]
-        public int StatesNumber => States == null || States.Count == 0 ? 0 : States.Count;
+        public Country? Country { get; set; }
+
+        public ICollection<City>? Cities { get; set; }
+
+        [DisplayName("Ciudades")]
+        public int CitiesNumber => Cities == null || Cities.Count  == 0 ? 0 : Cities.Count;
     }
 }
