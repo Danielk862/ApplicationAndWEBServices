@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Orders.Backend.Data;
+using Orders.Backend.Repositories.Interfaces;
 using Orders.Shared.Entites;
-using Orders.Shared.Interfaces;
 using Orders.Shared.Responses;
 
 namespace Orders.Backend.Repositories.Implementations
@@ -10,7 +10,7 @@ namespace Orders.Backend.Repositories.Implementations
     {
         private readonly DataContext _dataContext;
 
-        public CountriesRepository(DataContext dataContext) : base(dataContext) 
+        public CountriesRepository(DataContext dataContext) : base(dataContext)
         {
             _dataContext = dataContext;
         }

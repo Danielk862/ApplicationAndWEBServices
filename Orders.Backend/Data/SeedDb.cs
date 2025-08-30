@@ -22,8 +22,61 @@ namespace Orders.Backend.Data
         {
             if (!_dataContext.Countries.Any())
             {
-                _dataContext.Countries.Add(new Country { Name = "Colombia" });
-                _dataContext.Countries.Add(new Country { Name = "Estados Unidos" });
+                _dataContext.Countries.Add(new Country
+                {
+                    Name = "Colombia",
+                    States = [
+                        new State()
+                        {
+                            Name = "Antioquia",
+                            Cities = [
+                                new City() { Name = "Medellín"},
+                                new City() { Name = "Itagui"},
+                                new City() { Name = "Envigado"},
+                                new City() { Name = "Bello"},
+                                new City() { Name = "Rionegro"}
+                            ]
+                        },
+                        new State()
+                        {
+                            Name = "Bogotá",
+                            Cities = [
+                                new City() { Name = "Usaquen"},
+                                new City() { Name = "Chapinero"},
+                                new City() { Name = "Santa fe"},
+                                new City() { Name = "Usme"},
+                                new City() { Name = "Bosa"}
+                            ]
+                        }
+                    ],
+                });
+                _dataContext.Countries.Add(new Country 
+                { 
+                    Name = "Estados Unidos",
+                    States = [
+                        new State()
+                        {
+                            Name = "Florida",
+                            Cities = [
+                                new City() { Name = "Orlando" },
+                                new City() { Name = "Miami" },
+                                new City() { Name = "Tampa" },
+                                new City() { Name = "Fort Lauderdale" },
+                                new City() { Name = "Key Wets" }
+                            ]
+                        },
+                        new State() {
+                            Name = "Texas",
+                            Cities = [
+                                new City() { Name = "Houston" },
+                                new City() { Name = "San antonio" },
+                                new City() { Name = "Dallas" },
+                                new City() { Name = "Austin" },
+                                new City() { Name = "El paso" },
+                            ]
+                        }
+                    ]
+                });
             }
 
             await _dataContext.SaveChangesAsync();

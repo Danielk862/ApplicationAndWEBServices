@@ -52,14 +52,14 @@ namespace Orders.Backend.Repositories.Implementations
             {
                 return new ActionResponse<T>
                 {
-                    WasSuccess = true,
                     Messages = "Registro no encontrado"
                 };
             }
 
+            _entity.Remove(row);
+
             try
             {
-                _entity.Remove(row);
                 await _dataContext.SaveChangesAsync();
                 return new ActionResponse<T>
                 {
@@ -70,7 +70,6 @@ namespace Orders.Backend.Repositories.Implementations
             {
                 return new ActionResponse<T>
                 {
-                    WasSuccess = false,
                     Messages = "No se puede borrar, por que tiene registros relacionados."
                 };
             }
@@ -91,25 +90,23 @@ namespace Orders.Backend.Repositories.Implementations
 
             return new ActionResponse<T>
             {
-                WasSuccess = false,
                 Messages = "Registro no encontrado"
             };
         }
 
-        public virtual async Task<ActionResponse<IEnumerable<T>>> GetAsync()
-        {
-            return new ActionResponse<IEnumerable<T>>
+        public virtual async Task<ActionResponse<IEnumerable<T>>> GetAsync() =>
+             new ActionResponse<IEnumerable<T>>
             {
                 WasSuccess = true,
                 Result = await _entity.ToListAsync()
             };
-        }
-
+        
         public virtual async Task<ActionResponse<T>> UpdateAsync(T entity)
         {
+            _dataContext.Update(entity);
+
             try
             {
-                _dataContext.Update(entity);
                 await _dataContext.SaveChangesAsync();
                 return new ActionResponse<T>
                 {
@@ -129,23 +126,11 @@ namespace Orders.Backend.Repositories.Implementations
         #endregion
 
         #region Private Methods
-        private ActionResponse<T> ExceptionActionResponse(Exception ex)
-        {
-            return new ActionResponse<T>
-            {
-                WasSuccess = false,
-                Messages = ex.Message
-            };
-        }
-
-        private ActionResponse<T> DbUpdateExceptionActionResponse()
-        {
-            return new ActionResponse<T>
-            {
-                WasSuccess = false,
-                Messages = "Ya existe el registro que estas intentando crear"
-            };
-        }
+        private ActionResponse<T> ExceptionActionResponse(Exception ex) =>       
+             new ActionResponse<T> { Messages = ex.Message };
+        
+        private ActionResponse<T> DbUpdateExceptionActionResponse() => 
+            new ActionResponse<T> { Messages = "Ya existe el registro que estas intentando crear" };        
         #endregion
     }
 }

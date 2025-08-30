@@ -21,7 +21,7 @@ namespace Orders.Backend.Controllers
             {
                 return Ok(action.Result);
             }
-            return BadRequest();
+            return BadRequest(action.Messages);
         }
 
         [HttpGet("{id}")]
