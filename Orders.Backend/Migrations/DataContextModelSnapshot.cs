@@ -60,10 +60,10 @@ namespace Orders.Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
-
                     b.HasIndex("StateId");
+
+                    b.HasIndex("Id", "Name")
+                        .IsUnique();
 
                     b.ToTable("Cities");
                 });
@@ -109,7 +109,7 @@ namespace Orders.Backend.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("Name")
+                    b.HasIndex("Id", "Name")
                         .IsUnique();
 
                     b.ToTable("States");

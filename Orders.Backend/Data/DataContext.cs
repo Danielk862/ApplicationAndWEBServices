@@ -17,9 +17,9 @@ namespace Orders.Backend.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Category>().HasIndex(x => x.Name).IsUnique();
-            modelBuilder.Entity<City>().HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<City>().HasIndex(x => new { x.Id, x.Name }).IsUnique();
             modelBuilder.Entity<Country>().HasIndex(x => x.Name).IsUnique();
-            modelBuilder.Entity<State>().HasIndex(x => x.Name).IsUnique();
+            modelBuilder.Entity<State>().HasIndex(x => new {x.Id, x.Name}).IsUnique();
             DisableCascading(modelBuilder);
         }
 

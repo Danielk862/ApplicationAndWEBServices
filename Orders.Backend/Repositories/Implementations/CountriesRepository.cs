@@ -31,14 +31,14 @@ namespace Orders.Backend.Repositories.Implementations
         public override async Task<ActionResponse<Country>> GetAsync(int id)
         {
             var country = await _dataContext.Countries
-                .Include(x => x.States)
+                .Include(x => x.States!)
+                .ThenInclude(x => x.Cities)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (country == null)
             {
                 return new ActionResponse<Country>
                 {
-                    WasSuccess = false,
                     Messages = "País no existe"
                 };
             }

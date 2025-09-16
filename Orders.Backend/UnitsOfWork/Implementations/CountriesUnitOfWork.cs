@@ -1,5 +1,4 @@
-﻿using Orders.Backend.Repositories.Implementations;
-using Orders.Backend.Repositories.Interfaces;
+﻿using Orders.Backend.Repositories.Interfaces;
 using Orders.Backend.UnitsOfWork.Interfaces;
 using Orders.Shared.Entites;
 using Orders.Shared.Responses;
