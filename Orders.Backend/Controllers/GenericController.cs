@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Orders.Backend.DTOs;
 using Orders.Backend.UnitsOfWork.Interfaces;
 
 namespace Orders.Backend.Controllers
@@ -17,7 +18,7 @@ namespace Orders.Backend.Controllers
         {
             var action = await _unitOfWork.GetAsync();
 
-            if (action .WasSuccess)
+            if (action.WasSuccess)
             {
                 return Ok(action.Result);
             }
@@ -46,7 +47,7 @@ namespace Orders.Backend.Controllers
                 return Ok(action.Result);
             }
 
-            return BadRequest(action.Messages);    
+            return BadRequest(action.Messages);
         }
 
         [HttpPut]
@@ -65,7 +66,7 @@ namespace Orders.Backend.Controllers
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> DeleteAsync(int id)
         {
-            var action = await  _unitOfWork.DeleteAsync(id);
+            var action = await _unitOfWork.DeleteAsync(id);
 
             if (action.WasSuccess)
             {
@@ -73,6 +74,30 @@ namespace Orders.Backend.Controllers
             }
 
             return BadRequest(action.Messages);
+        }
+
+        [HttpGet("paginated")]
+        public virtual async Task<IActionResult> GetAsync([FromQuery] PaginationDTO pagination)
+        {
+            var action = await _unitOfWork.GetAsync(pagination);
+
+            if (action.WasSuccess)
+            {
+                return Ok(action.Result);
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("totalRecords")]
+        public virtual async Task<IActionResult> GetTotalRecordsAsync([FromQuery] PaginationDTO pagination)
+        {
+            var action = await _unitOfWork.GetTotalRecordsAsync(pagination);
+
+            if (action.WasSuccess)
+            {
+                return Ok(action.Result);
+            }
+            return BadRequest();
         }
     }
 }
