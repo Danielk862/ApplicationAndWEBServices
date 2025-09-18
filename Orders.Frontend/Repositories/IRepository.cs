@@ -6,9 +6,9 @@ namespace Orders.Frontend.Repositories
     {
         Task<HttpResponseWrapper<T>> GetAsync<T>(string url);
         Task<HttpResponseWrapper<object>> PostAsync<T>(string url, T model);
-        Task<HttpResponseWrapper<ActionResponse>> PostAsync<T, ActionResponse>(string url, T model);
+        Task<HttpResponseWrapper<T>> PostAsync<T, TActionResponse>(string url, T model);
         Task<HttpResponseWrapper<object>> DeleteAsync<T>(string url);
         Task<HttpResponseWrapper<object>> PutAsync<T>(string url, T model);
-        Task<HttpResponseWrapper<ActionResponse>> PutAsync<T, ActionResponse>(string url, T model);
+        Task<HttpResponseWrapper<T>> PutAsync<T, TActionResponse>(string url, T model);
     }
 }

@@ -37,7 +37,7 @@ namespace Orders.Frontend.Repositories
             return new HttpResponseWrapper<object>(null, !responseHttp.IsSuccessStatusCode, responseHttp);
         }
 
-        public async Task<HttpResponseWrapper<ActionResponse>> PostAsync<T, ActionResponse>(string url, T model)
+        public async Task<HttpResponseWrapper<T>> PostAsync<T, ActionResponse>(string url, T model)
         {
             var messageJSON = JsonSerializer.Serialize(model);
             var messageContent = new StringContent(messageJSON, Encoding.UTF8, "application/json");
@@ -45,10 +45,10 @@ namespace Orders.Frontend.Repositories
 
             if (responseHttp.IsSuccessStatusCode)
             {
-                var response = await UnserializeAnswerAsync<ActionResponse>(responseHttp);
-                return new HttpResponseWrapper<ActionResponse>(response, false, responseHttp);
+                var response = await UnserializeAnswerAsync<T>(responseHttp);
+                return new HttpResponseWrapper<T>(response, false, responseHttp);
             }
-            return new HttpResponseWrapper<ActionResponse>(default, !responseHttp.IsSuccessStatusCode, responseHttp);
+            return new HttpResponseWrapper<T>(default, !responseHttp.IsSuccessStatusCode, responseHttp);
         }
 
         public async Task<HttpResponseWrapper<object>> DeleteAsync<T>(string url)
@@ -65,7 +65,7 @@ namespace Orders.Frontend.Repositories
             return new HttpResponseWrapper<object>(null, !responseHttp.IsSuccessStatusCode, responseHttp);
         }
 
-        public async Task<HttpResponseWrapper<ActionResponse>> PutAsync<T, ActionResponse>(string url, T model)
+        public async Task<HttpResponseWrapper<T>> PutAsync<T, ActionResponse>(string url, T model)
         {
             var messageJSON = JsonSerializer.Serialize(model);
             var messageContent = new StringContent(messageJSON, Encoding.UTF8, "application/json");
@@ -73,10 +73,10 @@ namespace Orders.Frontend.Repositories
 
             if (responseHttp.IsSuccessStatusCode)
             {
-                var response = await UnserializeAnswerAsync<ActionResponse>(responseHttp);
-                return new HttpResponseWrapper<ActionResponse>(response, false, responseHttp);
+                var response = await UnserializeAnswerAsync<T>(responseHttp);
+                return new HttpResponseWrapper<T>(response, false, responseHttp);
             }
-            return new HttpResponseWrapper<ActionResponse>(default, true, responseHttp);
+            return new HttpResponseWrapper<T>(default, true, responseHttp);
         }
 
         private async Task<T?> UnserializeAnswerAsync<T>(HttpResponseMessage responseHttp)
