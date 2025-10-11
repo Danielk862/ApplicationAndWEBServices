@@ -23,5 +23,8 @@ namespace Orders.Backend.UnitsOfWork.Implementations
 
         public override async Task<ActionResponse<IEnumerable<Country>>> GetAsync(PaginationDTO pagination) => 
             await _countriesRepository.GetAsync(pagination);
+
+        public override async Task<ActionResponse<int>> GetTotalRecordsAsync(PaginationDTO paginationDTO) =>
+            await _countriesRepository.GetTotalRecordsAsync(paginationDTO);
     }
 }

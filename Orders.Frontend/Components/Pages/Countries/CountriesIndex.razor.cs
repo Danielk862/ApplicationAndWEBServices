@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
+using Orders.Frontend.Components.Pages.Shared;
 using Orders.Frontend.Repositories;
 using Orders.Shared.Entites;
 using System.Net;
@@ -108,7 +109,7 @@ namespace Orders.Frontend.Components.Pages.Countries
             }
             else
             {
-                dialog = await DialogService.ShowAsync<CountryEdit>("Nuevo país", options);
+                dialog = await DialogService.ShowAsync<CountryCreate>("Nuevo país", options);
             }
 
             var result = await dialog.Result;
@@ -124,7 +125,7 @@ namespace Orders.Frontend.Components.Pages.Countries
         {
             var parameters = new DialogParameters
             {
-                { "Message ", $"Estas seguro de borrar el país: {country.Name}"}
+                { "Message", $"Estas seguro de borrar el país: {country.Name}"}
             };
 
             var options = new DialogOptions
@@ -134,7 +135,7 @@ namespace Orders.Frontend.Components.Pages.Countries
                 CloseOnEscapeKey = true
             };
 
-            var dialog = await DialogService.ShowAsync<CountryEdit>("Confirmación", parameters, options);
+            var dialog = await DialogService.ShowAsync<ConfirmDialog>("Confirmación", parameters, options);
             var result = await dialog.Result;
 
             if (result!.Canceled)

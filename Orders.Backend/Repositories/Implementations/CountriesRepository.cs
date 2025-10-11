@@ -58,6 +58,11 @@ namespace Orders.Backend.Repositories.Implementations
                 .Include(x => x.States)
                 .AsQueryable();
 
+            if (!string.IsNullOrWhiteSpace(pagination.Filter))
+            {
+                queryble = queryble.Where(x => x.Name.ToLower().Contains(pagination.Filter.ToLower()));
+            }
+
             return new ActionResponse<IEnumerable<Country>>
             {
                 WasSuccess = true,
@@ -65,6 +70,24 @@ namespace Orders.Backend.Repositories.Implementations
                     .OrderBy(x => x.Name)
                     .Paginate(pagination)
                     .ToListAsync()
+            };
+        }
+
+        public override async Task<ActionResponse<int>> GetTotalRecordsAsync(PaginationDTO paginationDTO)
+        {
+            var queryable = _dataContext.Countries.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(paginationDTO.Filter))
+            {
+                queryable = queryable.Where(x => x.Name.ToLower().Contains(paginationDTO.Filter.ToLower()));
+            }
+
+            double count = await queryable.CountAsync();
+
+            return new ActionResponse<int>
+            {
+                WasSuccess = true,
+                Result = (int)count
             };
         }
     }

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace Orders.Frontend.Components.Shared
+namespace Orders.Frontend.Components.Pages.Shared
 {
     public partial class FilterComponent
     {
