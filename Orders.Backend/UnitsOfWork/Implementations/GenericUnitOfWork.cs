@@ -1,4 +1,4 @@
-﻿using Orders.Backend.DTOs;
+﻿using Orders.Shared.DTOs;
 using Orders.Backend.Repositories.Interfaces;
 using Orders.Backend.UnitsOfWork.Interfaces;
 using Orders.Shared.Responses;

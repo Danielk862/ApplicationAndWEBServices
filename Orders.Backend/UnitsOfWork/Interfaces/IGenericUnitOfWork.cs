@@ -1,4 +1,4 @@
-﻿using Orders.Backend.DTOs;
+﻿using Orders.Shared.DTOs;
 using Orders.Shared.Responses;
 
 namespace Orders.Backend.UnitsOfWork.Interfaces

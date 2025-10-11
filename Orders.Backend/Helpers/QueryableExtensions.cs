@@ -1,4 +1,4 @@
-﻿using Orders.Backend.DTOs;
+﻿using Orders.Shared.DTOs;
 
 namespace Orders.Backend.Helpers
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Orders.Backend.DTOs;
+using Orders.Shared.DTOs;
 using Orders.Backend.UnitsOfWork.Interfaces;
 
 namespace Orders.Backend.Controllers

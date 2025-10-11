@@ -5,16 +5,16 @@ namespace Orders.Backend.Data
 {
     public class SeedDb
     {
-        private readonly DataContext _dataContext;
+        private readonly DataContext _context;
 
         public SeedDb(DataContext dataContext)
         {
-            _dataContext = dataContext;
+            _context = dataContext;
         }
 
         public async Task SeedAsync()
         {
-            await _dataContext.Database.EnsureCreatedAsync();
+            await _context.Database.EnsureCreatedAsync();
             await CheckCountriesFullAsync();
             await CheckCountriesAsync();
             await CheckCategoriesAsync();
@@ -22,18 +22,18 @@ namespace Orders.Backend.Data
 
         private async Task CheckCountriesFullAsync()
         {
-            if (!_dataContext.Countries.Any())
+            if (!_context.Countries.Any())
             {
                 var countriesSqlScript = File.ReadAllText("Data\\CountriesStatesCities.sql");
-                await _dataContext.Database.ExecuteSqlRawAsync(countriesSqlScript);
+                await _context.Database.ExecuteSqlRawAsync(countriesSqlScript);
             }
         }
 
         private async Task CheckCountriesAsync()
         {
-            if (!_dataContext.Countries.Any())
+            if (!_context.Countries.Any())
             {
-                _dataContext.Countries.Add(new Country
+                _context.Countries.Add(new Country
                 {
                     Name = "Colombia",
                     States = [
@@ -61,7 +61,7 @@ namespace Orders.Backend.Data
                         }
                     ],
                 });
-                _dataContext.Countries.Add(new Country
+                _context.Countries.Add(new Country
                 {
                     Name = "Estados Unidos",
                     States = [
@@ -90,18 +90,34 @@ namespace Orders.Backend.Data
                 });
             }
 
-            await _dataContext.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
 
         private async Task CheckCategoriesAsync()
         {
-            if (!_dataContext.Categories.Any())
+            if (!_context.Categories.Any())
             {
-                _dataContext.Categories.Add(new Category { Name = "Calzado" });
-                _dataContext.Categories.Add(new Category { Name = "Tecnología" });
+                _context.Categories.Add(new Category { Name = "Apple" }); 
+                _context.Categories.Add(new Category { Name = "Autos" });
+                _context.Categories.Add(new Category { Name = "Belleza" }); 
+                _context.Categories.Add(new Category { Name = "Calzado" }); 
+                _context.Categories.Add(new Category { Name = "Comida" }); 
+                _context.Categories.Add(new Category { Name = "Cosmeticos" });
+                _context.Categories.Add(new Category { Name = "Deportes" }); 
+                _context.Categories.Add(new Category { Name = "Erótica" }); 
+                _context.Categories.Add(new Category { Name = "Ferreteria" });
+                _context.Categories.Add(new Category { Name = "Gamer" }); 
+                _context.Categories.Add(new Category { Name = "Hogar" });
+                _context.Categories.Add(new Category { Name = "Jardín" }); 
+                _context.Categories.Add(new Category { Name = "Jugetes" }); 
+                _context.Categories.Add(new Category { Name = "Lenceria" }); 
+                _context.Categories.Add(new Category { Name = "Mascotas" });
+                _context.Categories.Add(new Category { Name = "Nutrición" }); 
+                _context.Categories.Add(new Category { Name = "Ropa" });
+                _context.Categories.Add(new Category { Name = "Tecnología" });
             }
 
-            await _dataContext.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
-}
+} //TODO: voy en la página 58

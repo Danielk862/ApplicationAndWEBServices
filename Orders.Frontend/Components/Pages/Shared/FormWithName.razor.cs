@@ -18,7 +18,6 @@ namespace Orders.Frontend.Components.Pages.Shared
 
         public bool FormPostedSuccessfully { get; set; }
 
-        // TODO: revisar por que no funciona el override
         protected override void OnInitialized()
         {
             editContext = new(Model);

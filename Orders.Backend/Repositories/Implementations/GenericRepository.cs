@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Orders.Backend.Data;
-using Orders.Backend.DTOs;
+using Orders.Shared.DTOs;
 using Orders.Backend.Helpers;
 using Orders.Backend.Repositories.Interfaces;
 using Orders.Shared.Responses;

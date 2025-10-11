@@ -1,4 +1,4 @@
-﻿namespace Orders.Backend.DTOs
+﻿namespace Orders.Shared.DTOs
 {
     public class PaginationDTO
     {
