@@ -25,9 +25,9 @@ else
             <MudSpacer /> 
             <FilterComponent ApplyFilter="SetFilterValue" /> 
         </ToolBarContent> 
-        <HeaderContent> 
-            <MudTh>País</MudTh> 
-            <MudTh style="width: 100px;">Estados</MudTh> 
+        <HeaderContent>
+            <MudTh>País</MudTh>
+            <MudTh style="width: 100px;">Estados</MudTh>
             <MudTh style="width: 270px;">Acciones</MudTh> 
         </HeaderContent>
         <RowTemplate>
@@ -38,9 +38,7 @@ else
                         @context.StatesNumber
                     </MudButton>
                 </MudTooltip>
-            </MudTd>
-            <MudTd>@context.Name</MudTd> 
-            <MudTd>@context.StatesNumber</MudTd> 
+            </MudTd> 
             <MudTd>
                 <MudTooltip Text="Editar"> 
                     <MudButton Variant="Variant.Filled" 
