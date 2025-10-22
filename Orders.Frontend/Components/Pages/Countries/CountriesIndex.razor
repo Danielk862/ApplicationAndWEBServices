@@ -29,8 +29,16 @@ else
             <MudTh>País</MudTh> 
             <MudTh style="width: 100px;">Estados</MudTh> 
             <MudTh style="width: 270px;">Acciones</MudTh> 
-        </HeaderContent> 
+        </HeaderContent>
         <RowTemplate>
+            <MudTd>@context.Name</MudTd>
+            <MudTd DataLabel="Estados">
+                <MudTooltip Text="Estados">
+                    <MudButton Variant="Variant.Filled" EndIcon="@Icons.Material.Filled.Map" Color="Color.Info" OnClick="@(() => StatesAction(@context))" style="width: 100px;">
+                        @context.StatesNumber
+                    </MudButton>
+                </MudTooltip>
+            </MudTd>
             <MudTd>@context.Name</MudTd> 
             <MudTd>@context.StatesNumber</MudTd> 
             <MudTd>
@@ -61,5 +69,3 @@ else
             </PagerContent>
     </MudTable>
 }
-
-
